@@ -67,6 +67,23 @@ Feel free to contribute and/or use this library :-)
          get.id(fieldId).appendChild(canvas);
        }
     }
+    //calculations
+    random = { // NOTE: not done 
+      //randombetween, random, severalrandom(return arr, amount as argument)
+    }
+    geometry = { // NOTE: proof of concept, not done -> add more
+      //circumference, areal etc as subobject with shape as method
+      circumference: {
+        circle: function(radius){
+          return radius * 2 * Math.PI;
+        },
+      },
+      areal: {
+        circle: function(radius){
+          return radius * radius * Math.PI;
+        }
+      }
+    }
     //practical data/arrays/related
     colors = {
       dark: ["rgb(23, 142, 168)","rgb(132, 16, 144)","rgb(66, 142, 19)",
