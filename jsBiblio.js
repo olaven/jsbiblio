@@ -68,11 +68,11 @@ Feel free to contribute and/or use this library :-)
        }
     }
     //calculations
-    random = { // NOTE: not done 
+    random = { // NOTE: not done
       //randombetween, random, severalrandom(return arr, amount as argument)
     }
     geometry = { // NOTE: proof of concept, not done -> add more
-      //circumference, areal etc as subobject with shape as method
+       //circumference, areal etc as subobject with shape as method
       circumference: {
         circle: function(radius){
           return radius * 2 * Math.PI;
@@ -81,6 +81,11 @@ Feel free to contribute and/or use this library :-)
       areal: {
         circle: function(radius){
           return radius * radius * Math.PI;
+        }
+      },
+      volume: {
+        cube: function(x, y, z){
+          return x * y * z;
         }
       }
     }
@@ -93,7 +98,63 @@ Feel free to contribute and/or use this library :-)
       "rgb(201, 138, 92)","rgb(104, 151, 187)","rgb(207, 203, 113)","rgb(107, 219, 235)",
       "rgb(92, 93, 124)","rgb(216, 230, 104)"],
     };
+   //NOT CATEGORIZED YET
+   checkDuplicates = function(array){
+    //returns an object with results
+    var found = [];
+    for(i in array){
+      var index = array[i];
+      found[index] = 0;
+    }
+    for(i in array){
+      var index = array[i];
+      found[index] += 1;
+    }
+    return found;
+   }
+   shuffleArray = function(array){ //source: http://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
+    var currentIndex = array.length, temporaryValue, randomIndex;
+    // While there remain elements to shuffle...
+    while (0 !== currentIndex) {
+      // Pick a remaining element...
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex -= 1;
+      // And swap it with the current element.
+      temporaryValue = array[currentIndex];
+      array[currentIndex] = array[randomIndex];
+      array[randomIndex] = temporaryValue;
+    }
+    return array;
+
+   }
    print = function(msg){
      console.log(msg);
     }
+    Array.prototype.flatten = function(){ // NOTE: needs more work, not done
+    let returning_arr = [];
+    console.log(this);
+    for(i in this){
+      switch (typeof this[i]) {
+        case 'function':
+            //do nothing
+          break;
+        case 'array':
+            //be clever
+            for(x in this[i]){
+              returning_arr.push(this[i][x]);
+            }
+          break;
+        default:
+          returning_arr.push(this[i]);
+      }
+    }
+    return returning_arr;
+    /*
+      make an array.flatten. This method should transform twodimensional
+      arrays to onedimensjonal arrays:
+        var twodim = [[1,2,3,4], [11,22,33,44]];
+        var onedim = todim.flatten();
+        //onedim = [1,2,3,4,11,22,33,44];
+    */
+  }
 })();
