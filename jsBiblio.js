@@ -69,7 +69,20 @@ Feel free to contribute and/or use this library :-)
     }
     //calculations
     random = { // NOTE: not done
-      //randombetween, random, severalrandom(return arr, amount as argument)
+      between: function(from, to){
+        return Math.floor(Math.random()*(to-from+1)+from);
+      },
+      //returns a random number below 0 and specified
+      below: function(to){
+        Math.random()*to;
+      },
+      array: function(amount){
+        var arr = [];
+        for(i = 0; i < amount; i++){
+          arr.push(Math.random());
+        }
+        return arr;
+      }
     }
     geometry = { // NOTE: proof of concept, not done -> add more
        //circumference, areal etc as subobject with shape as method
@@ -87,6 +100,32 @@ Feel free to contribute and/or use this library :-)
         cube: function(x, y, z){
           return x * y * z;
         }
+      }
+    }
+    parse = {
+      bit: function(bitword) {//parsing bitword (1010) to decimal (10)
+        //first: converting to string so that it can be iterated through
+        if (isBinary(bitword)) {
+          var decimal = 0;
+          bitword = (typeof bitword != String ? bitword.toString() : bitword);
+          for(i in bitword){
+            if (bitword[i] === "1") {
+              console.log(typeof bitword);
+              decimal += Math.pow(2, i);
+            }
+          }
+
+          return decimal;
+
+        } else {
+          throw "argument must consist of 1's and 0's"
+        }
+      },
+      decimal: function(num) {//parsing decimal number to string of bits
+        // NOTE: NOT DONE 
+      },
+      int: function(string) {
+        return parseInt(string);
       }
     }
     //practical data/arrays/related
@@ -156,5 +195,16 @@ Feel free to contribute and/or use this library :-)
         var onedim = todim.flatten();
         //onedim = [1,2,3,4,11,22,33,44];
     */
+  }
+  isBinary = function(binary){
+    if (typeof binary != String) {
+      binary = binary.toString();
+    }
+    for(i in binary){
+      if (binary[i] != "0" && binary[i] != "1") {
+        return false;
+      }
+    }
+    return true;
   }
 })();
