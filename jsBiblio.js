@@ -23,8 +23,9 @@ Feel free to contribute and/or use this library :-)
       },
       table: function(data, tableId){
         get.id(tableId).innerHTML = "";
+
         for(i in data){
-          let tr = create.element("tr");
+          tr = create.element("tr");
           for(x in data[i]){
             let td = create.element("td");
             td.innerHTML = data[i][x];
@@ -94,11 +95,30 @@ Feel free to contribute and/or use this library :-)
       areal: {
         circle: function(radius){
           return radius * radius * Math.PI;
+        },
+        triangle: function(bottom, height){
+          return (bottom * height) / 2;
+        },
+        square: function(side){
+          return side * side;
+        },
+        rectangle: function(sideX, sideY){
+          return sideX * sideY;
         }
       },
       volume: {
         cube: function(x, y, z){
           return x * y * z;
+        },
+        sphere: function(radius){
+          return (4/3)*Math.PI*Math.pow(radius,3);
+        },
+        pyramid: function(Bottomareal, height){
+          /*comcluded not to use sides of bottom because that can be
+          by using a combination of this method and the
+          "geometry.areal.triangle"-method.
+          Subject to change*/
+          return (Bottomareal*height)/3;
         }
       }
     }
@@ -122,7 +142,7 @@ Feel free to contribute and/or use this library :-)
         }
       },
       decimal: function(num) {//parsing decimal number to string of bits
-        // NOTE: NOT DONE 
+        // NOTE: NOT DONE
       },
       int: function(string) {
         return parseInt(string);
@@ -169,33 +189,15 @@ Feel free to contribute and/or use this library :-)
    print = function(msg){
      console.log(msg);
     }
-    Array.prototype.flatten = function(){ // NOTE: needs more work, not done
-    let returning_arr = [];
-    console.log(this);
-    for(i in this){
-      switch (typeof this[i]) {
-        case 'function':
-            //do nothing
-          break;
-        case 'array':
-            //be clever
-            for(x in this[i]){
-              returning_arr.push(this[i][x]);
-            }
-          break;
-        default:
-          returning_arr.push(this[i]);
-      }
-    }
-    return returning_arr;
+   flatten = function(){
     /*
-      make an array.flatten. This method should transform twodimensional
-      arrays to onedimensjonal arrays:
-        var twodim = [[1,2,3,4], [11,22,33,44]];
-        var onedim = todim.flatten();
-        //onedim = [1,2,3,4,11,22,33,44];
-    */
-  }
+        make an array.flatten. This method should transform twodimensional
+        arrays to onedimensjonal arrays:
+          var twodim = [[1,2,3,4], [11,22,33,44]];
+          var onedim = todim.flatten();
+          //onedim = [1,2,3,4,11,22,33,44];
+      */
+    }
   isBinary = function(binary){
     if (typeof binary != String) {
       binary = binary.toString();
