@@ -125,7 +125,7 @@ Feel free to contribute and/or use this library :-)
     parse = {
       bit: function(bitword) {//parsing bitword (1010) to decimal (10)
         //first: converting to string so that it can be iterated through
-        if (isBinary(bitword)) {
+        if (is.binary(bitword)) {
           var decimal = 0;
           bitword = (typeof bitword != String ? bitword.toString() : bitword);
           for(i in bitword){
@@ -146,6 +146,35 @@ Feel free to contribute and/or use this library :-)
       },
       int: function(string) {
         return parseInt(string);
+      }
+    }
+    /*shoud containt methods that return either "true" or "false"*/
+    is = {
+      //checks if the number is prime
+      prime: function(num){
+        if (num % 2 === 0) {
+          return false;
+        }
+        return true;
+      },
+      //checks if the number is even
+      even: function(num) {
+        if (num % 2 === 0) {
+          return true;
+        }
+        return false;
+      },
+      //checks if the number looks like a binary number
+      binary: function(binaryInput){
+        if (typeof binaryInput != String) {
+          binaryInput = binaryInput.toString();
+        }
+        for(i in binaryInput){
+          if (binaryInput[i] != "0" && binaryInput[i] != "1") {
+            return false;
+          }
+        }
+        return true;
       }
     }
     //practical data/arrays/related
@@ -186,9 +215,9 @@ Feel free to contribute and/or use this library :-)
     return array;
 
    }
-   print = function(msg){
+   log = function(msg){
      console.log(msg);
-    }
+   }
    flatten = function(){
     /*
         make an array.flatten. This method should transform twodimensional
@@ -198,15 +227,4 @@ Feel free to contribute and/or use this library :-)
           //onedim = [1,2,3,4,11,22,33,44];
       */
     }
-  isBinary = function(binary){
-    if (typeof binary != String) {
-      binary = binary.toString();
-    }
-    for(i in binary){
-      if (binary[i] != "0" && binary[i] != "1") {
-        return false;
-      }
-    }
-    return true;
-  }
 })();
