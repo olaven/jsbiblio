@@ -119,6 +119,9 @@ Feel free to contribute and/or use this library :-)
           "geometry.areal.triangle"-method.
           Subject to change*/
           return (Bottomareal*height)/3;
+        },
+        cone: function(radius, height){
+          return geometry.areal.circle(radius) * height
         }
       }
     }
@@ -134,7 +137,6 @@ Feel free to contribute and/or use this library :-)
               decimal += Math.pow(2, i);
             }
           }
-
           return decimal;
 
         } else {
@@ -175,6 +177,19 @@ Feel free to contribute and/or use this library :-)
           }
         }
         return true;
+      },
+      //checks if an argument is in a array -> string may be added later
+      contains: function(findThis, inThis){
+        if (typeof inThis == "object") {//is an array
+          for(i in inThis){
+            if (inThis[i] === findThis) {
+              return true;
+            }
+          }
+        } else {
+          throw "is.contans() is not supported yet";
+        }
+        return false;
       }
     }
     //practical data/arrays/related
@@ -200,7 +215,7 @@ Feel free to contribute and/or use this library :-)
     }
     return found;
    }
-   shuffleArray = function(array){ //source: http://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
+   shuffle = function(array){//source: http://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
     var currentIndex = array.length, temporaryValue, randomIndex;
     // While there remain elements to shuffle...
     while (0 !== currentIndex) {
@@ -213,10 +228,16 @@ Feel free to contribute and/or use this library :-)
       array[randomIndex] = temporaryValue;
     }
     return array;
-
    }
    log = function(msg){
      console.log(msg);
+   }
+   powerSequence = function(num, amount){
+     var arr = [];
+     for(i = 0; i < amount; i++){
+       arr.push(Math.pow(num, i));
+     }
+     return arr;
    }
    flatten = function(){
     /*
