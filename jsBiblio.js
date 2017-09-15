@@ -2,8 +2,17 @@
 This is a small library I am making as a learning exercise and for personal use.
 Feel free to contribute and/or use this library :-)
 */
+/*
 
+*/
 (function() {
+    love = function(){
+      return "<3";
+    }
+
+
+
+
     //getting html elements:
     get = {
       id: function(x){
@@ -152,8 +161,8 @@ Feel free to contribute and/or use this library :-)
     }
     /*shoud containt methods that return either "true" or "false"*/
     is = {
-      //checks if the number is prime
-      prime: function(num){
+      //checks if the number is odd
+      odd: function(num){
         if (num % 2 === 0) {
           return false;
         }
@@ -166,6 +175,24 @@ Feel free to contribute and/or use this library :-)
         }
         return false;
       },
+      //checks if number is prime
+      prime: function(num){
+        /*
+          A prime number (or a prime) is a natural number
+          greater than 1 that has no positive divisors other t
+          han 1 and itself -> https://en.wikipedia.org/wiki/List_of_prime_numbers
+        */
+        if(num <= 1) { // https://gist.github.com/earlonrails/3c623e14c6014529809309b3cb34bc00
+          return false;
+        }
+        let sqrtN = parseInt(Math.sqrt(num));
+        for(let i = sqrtN; i > 1; i--) {
+          if(num % i == 0) {
+            return false;
+          }
+        }
+        return true;
+      },
       //checks if the number looks like a binary number
       binary: function(binaryInput){
         if (typeof binaryInput != String) {
@@ -177,6 +204,21 @@ Feel free to contribute and/or use this library :-)
           }
         }
         return true;
+      },
+      //expects number. checks if positive
+      positive: function(num){
+        if (num >= 0) {
+          return true;
+        }
+        return false;
+      },
+      //expects number. checks if negative
+      //--> somewhat redundant, but it makes sense from a readable perspective
+      negative: function(num){
+        if (num < 0) {
+          return true;
+        }
+        return false;
       },
       //checks if an argument is in a array -> string may be added later
       contains: function(findThis, inThis){
@@ -191,6 +233,15 @@ Feel free to contribute and/or use this library :-)
         }
         return false;
       }
+    }
+    binary = {
+      /*
+        NOTE
+        add sånn at man kan bruke and or på binærtall
+
+        binary.and(1001, 1000) = 1000 f.eks.
+        binary.nor(1010, 0010) = 0100
+      */
     }
     //practical data/arrays/related
     colors = {
