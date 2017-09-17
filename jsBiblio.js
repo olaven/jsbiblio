@@ -236,13 +236,27 @@ Feel free to contribute and/or use this library :-)
     }
     binary = {
       /*
-        NOTE
+        NOTE DOUBLE NOTE NOT DONE 
         add sånn at man kan bruke and or på binærtall
 
         binary.and(1001, 1000) = 1000 f.eks.
         binary.nor(1010, 0010) = 0100
       */
-    }
+      and: function(bin1, bin2) {
+
+      },
+      or: function(bin1, bin2) {
+
+      },
+      xor: function(bin1, bin2) {
+
+      },
+      not: function() {
+
+      },
+      equals: function() {
+
+      }
     //practical data/arrays/related
     colors = {
       dark: ["rgb(23, 142, 168)","rgb(132, 16, 144)","rgb(66, 142, 19)",
