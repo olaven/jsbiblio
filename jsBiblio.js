@@ -242,15 +242,59 @@ Feel free to contribute and/or use this library :-)
     }
   };
   binary = {
-    /*
-        NOTE DOUBLE NOTE NOT DONE
-        add sånn at man kan bruke and or på binærtall
-
-        binary.and(1001, 1000) = 1000 f.eks.
-        binary.nor(1010, 0010) = 0100
-      */
     and: function(bin1, bin2) {
-      if (is.binary(bin1) && is.binary(bin2)) {
+      return binary.binaryLogicReusable(bin1, bin2, function(
+        longest,
+        shortest
+      ) {
+        let returnString = '';
+        for (i in shortest) {
+          if (shortest[i] == '1' && longest[i] == '1') {
+            returnString += '1';
+          } else {
+            returnString += '0';
+          }
+        }
+        return returnString;
+      });
+    },
+    or: function(bin1, bin2) {
+      return binary.binaryLogicReusable(bin1, bin2, function(
+        longest,
+        shortest
+      ) {
+        let returnString = '';
+        for (i in shortest) {
+          if (shortest[i] == '1' || longest[i] == '1') {
+            returnString += '1';
+          } else {
+            returnString += '0';
+          }
+        }
+        return returnString;
+      });
+    },
+    xor: function(bin1, bin2) {
+      return binary.binaryLogicReusable(bin1, bin2, function(
+        longest,
+        shortest
+      ) {
+        let returnString = '';
+        for (i in shortest) {
+          if (shortest[i] != longest[i]) {
+            returnString += '1';
+          } else {
+            returnString += '0';
+          }
+        }
+        return returnString;
+      });
+    },
+    //reused in all above logical binary operators where two bitwords are compared
+    binaryLogicReusable: function(bin1, bin2, logicFunction) {
+      if (!(is.binary(bin1) && is.binary(bin2))) {
+        throw 'both numbers must be written as binary';
+      } else {
         //arrays to check similar positions
         let arr1 = bin1.split('');
         let arr2 = bin2.split('');
@@ -260,26 +304,27 @@ Feel free to contribute and/or use this library :-)
         while (shortest.length < longest.length) {
           shortest.unshift('0');
         }
-        //declaring the string that will be returned as result
-        let returnString = '';
-        for (i in shortest) {
-          //could be "in longest" as well, they are the same length
-          if (shortest[i] == '1' && longest[i] == '1') {
-            returnString += '1';
-          } else {
-            returnString += '0';
-          }
+        if (typeof logicFunction != 'function') {
+          throw 'function with gate-logic not supplied correctly';
+        } else {
+          return logicFunction(longest, shortest);
         }
-
-        return returnString;
-      } else {
-        throw 'both numbers must be written as binary';
       }
     },
-    or: function(bin1, bin2) {},
-    xor: function(bin1, bin2) {},
-    not: function() {},
-    equals: function() {}
+    not: function(bitword) {
+      if (!is.binary(bitword)) {
+        throw 'argument must be readable as a bitword';
+      }
+      let returnString = '';
+      for (i in bitword) {
+        if (bitword[i] == '1') {
+          returnString += '0';
+        } else {
+          returnString += '1';
+        }
+      }
+      return returnString;
+    }
   };
   //practical data/arrays/related
   colors = {
@@ -306,37 +351,55 @@ Feel free to contribute and/or use this library :-)
       'rgb(216, 230, 104)'
     ]
   };
+  arrays = {
+    // NOTE: "arrays" is a bad name -> confusing with Array-object. better solution will be looked at
+    sortNum: function(array) {
+      // source: https://www.w3schools.com/jsref/jsref_sort.asp
+      return array.sort(function(a, b) {
+        return a - b;
+      });
+    },
+    checkDuplicates: function(array) {
+      //returns an object with results
+      var found = [];
+      for (i in array) {
+        var index = array[i];
+        found[index] = 0;
+      }
+      for (i in array) {
+        var index = array[i];
+        found[index] += 1;
+      }
+      return found;
+    },
+    shuffle: function(array) {
+      //source: http://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
+      var currentIndex = array.length,
+        temporaryValue,
+        randomIndex;
+      // While there remain elements to shuffle...
+      while (0 !== currentIndex) {
+        // Pick a remaining element...
+        randomIndex = Math.floor(Math.random() * currentIndex);
+        currentIndex -= 1;
+        // And swap it with the current element.
+        temporaryValue = array[currentIndex];
+        array[currentIndex] = array[randomIndex];
+        array[randomIndex] = temporaryValue;
+      }
+      return array;
+    },
+    flatten: function() {
+      /*
+          make an array.flatten. This method should transform twodimensional
+          arrays to onedimensjonal arrays:
+            var twodim = [[1,2,3,4], [11,22,33,44]];
+            var onedim = todim.flatten();
+            //onedim = [1,2,3,4,11,22,33,44];
+        */
+    }
+  };
   //NOT CATEGORIZED YET
-  checkDuplicates = function(array) {
-    //returns an object with results
-    var found = [];
-    for (i in array) {
-      var index = array[i];
-      found[index] = 0;
-    }
-    for (i in array) {
-      var index = array[i];
-      found[index] += 1;
-    }
-    return found;
-  };
-  shuffle = function(array) {
-    //source: http://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
-    var currentIndex = array.length,
-      temporaryValue,
-      randomIndex;
-    // While there remain elements to shuffle...
-    while (0 !== currentIndex) {
-      // Pick a remaining element...
-      randomIndex = Math.floor(Math.random() * currentIndex);
-      currentIndex -= 1;
-      // And swap it with the current element.
-      temporaryValue = array[currentIndex];
-      array[currentIndex] = array[randomIndex];
-      array[randomIndex] = temporaryValue;
-    }
-    return array;
-  };
   log = function(msg) {
     console.log(msg);
   };
@@ -346,14 +409,5 @@ Feel free to contribute and/or use this library :-)
       arr.push(Math.pow(num, i));
     }
     return arr;
-  };
-  flatten = function() {
-    /*
-        make an array.flatten. This method should transform twodimensional
-        arrays to onedimensjonal arrays:
-          var twodim = [[1,2,3,4], [11,22,33,44]];
-          var onedim = todim.flatten();
-          //onedim = [1,2,3,4,11,22,33,44];
-      */
   };
 })();
