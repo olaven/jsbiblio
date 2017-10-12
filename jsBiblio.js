@@ -326,31 +326,6 @@ Feel free to contribute and/or use this library :-)
       return returnString;
     }
   };
-  //practical data/arrays/related
-  colors = {
-    dark: [
-      'rgb(23, 142, 168)',
-      'rgb(132, 16, 144)',
-      'rgb(66, 142, 19)',
-      'rgb(223, 185, 22)',
-      'rgb(182, 12, 181)',
-      'rgb(73, 218, 7)',
-      'rgb(59, 18, 161)',
-      'rgb(207, 43, 247)',
-      'rgb(215, 22, 22)'
-    ],
-    bright: [
-      'rgb(174, 127, 209)',
-      'rgb(187, 113, 175)',
-      'rgb(160, 231, 80)',
-      'rgb(201, 138, 92)',
-      'rgb(104, 151, 187)',
-      'rgb(207, 203, 113)',
-      'rgb(107, 219, 235)',
-      'rgb(92, 93, 124)',
-      'rgb(216, 230, 104)'
-    ]
-  };
   arrays = {
     // NOTE: "arrays" is a bad name -> confusing with Array-object. better solution will be looked at
     sortNum: function(array) {
@@ -398,6 +373,31 @@ Feel free to contribute and/or use this library :-)
             //onedim = [1,2,3,4,11,22,33,44];
         */
     }
+  };
+  //practical data/arrays/related
+  colors = {
+    dark: [
+      'rgb(23, 142, 168)',
+      'rgb(132, 16, 144)',
+      'rgb(66, 142, 19)',
+      'rgb(223, 185, 22)',
+      'rgb(182, 12, 181)',
+      'rgb(73, 218, 7)',
+      'rgb(59, 18, 161)',
+      'rgb(207, 43, 247)',
+      'rgb(215, 22, 22)'
+    ],
+    bright: [
+      'rgb(174, 127, 209)',
+      'rgb(187, 113, 175)',
+      'rgb(160, 231, 80)',
+      'rgb(201, 138, 92)',
+      'rgb(104, 151, 187)',
+      'rgb(207, 203, 113)',
+      'rgb(107, 219, 235)',
+      'rgb(92, 93, 124)',
+      'rgb(216, 230, 104)'
+    ]
   };
   //NOT CATEGORIZED YET
   log = function(msg) {
