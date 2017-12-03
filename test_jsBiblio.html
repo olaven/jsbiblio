@@ -3,11 +3,22 @@
   <head>
     <meta charset="utf-8">
     <title></title>
+    <script type="text/javascript">
+    tableData = [
+      ["name", "number"],
+      ["olav", "343434"],
+      ["guro", "545445"],
+      ["eirik", "34525"]
+    ]
+      window.onload = function(){
+        create.table(tableData, "tableId");
+      }
+    </script>
   </head>
   <body>
+    <table id="tableId">
 
+    </table>
   </body>
-  <script type="text/javascript" src="jsBiblio.js">
-
-  </script>
+  <script type="text/javascript" src="jsBiblio.js"></script>
 </html>

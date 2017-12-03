@@ -302,7 +302,7 @@ Feel free to contribute and/or use this library :-)
         let shortest = arr1 < arr2 ? arr1 : arr2;
         let longest = arr1 > arr2 ? arr1 : arr2;
         while (shortest.length < longest.length) {
-          shortest.unshift('0');
+          shortest = '0' + shortest;
         }
         if (typeof logicFunction != 'function') {
           throw 'function with gate-logic not supplied correctly';
@@ -326,8 +326,8 @@ Feel free to contribute and/or use this library :-)
       return returnString;
     }
   };
-  arrays = {
-    // NOTE: "arrays" is a bad name -> confusing with Array-object. better solution will be looked at
+  array = {
+    // NOTE: "array" is a bad name -> confusing with Array-object. better solution will be looked at
     sortNum: function(array) {
       // source: https://www.w3schools.com/jsref/jsref_sort.asp
       return array.sort(function(a, b) {
@@ -364,7 +364,7 @@ Feel free to contribute and/or use this library :-)
       }
       return array;
     },
-    flatten: function() {
+    flatten: function(arr) {
       /*
           make an array.flatten. This method should transform twodimensional
           arrays to onedimensjonal arrays:
@@ -372,6 +372,18 @@ Feel free to contribute and/or use this library :-)
             var onedim = todim.flatten();
             //onedim = [1,2,3,4,11,22,33,44];
         */
+      let returArr = [];
+
+      for(i in arr){
+        if(typeof arr[i] === 'object' && typeof arr[i] !== null){
+          for(x in arr[i]){
+            returArr.push(arr[i][x]);
+          }
+        } else {
+          returArr.push(arr[i]);
+        }
+      }
+      return returArr;
     }
   };
   //practical data/arrays/related
@@ -398,10 +410,6 @@ Feel free to contribute and/or use this library :-)
       'rgb(92, 93, 124)',
       'rgb(216, 230, 104)'
     ]
-  };
-  //NOT CATEGORIZED YET
-  log = function(msg) {
-    console.log(msg);
   };
   powerSequence = function(num, amount) {
     var arr = [];
