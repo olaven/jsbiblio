@@ -156,10 +156,6 @@ Feel free to contribute and/or use this library :-)
         throw "argument must consist of 1's and 0's";
       }
     },
-    decimal: function(num) {
-      //parsing decimal number to string of bits
-      // NOTE: NOT DONE
-    },
     int: function(string) {
       return parseInt(string);
     }
@@ -239,6 +235,45 @@ Feel free to contribute and/or use this library :-)
         throw 'is.contans() is not supported yet';
       }
       return false;
+    },
+    /*checks if the input is valid -> can be used reasonably*/
+    // NOTE: subject to change
+    valid: {
+      /*checks if the string is valid as a string*/
+      string: function(input){
+        if(typeof input !== "string"){
+          return false;
+        }
+        return true;
+      },
+      /*checks if the string is valid as a string and has a length within specified limits*/
+      string: function(input, min, max){
+        if(typeof input !== "string" || input.length < min || input.length > max){
+          return false;
+        }
+        return true;
+      },
+      /*checks if the number is valid as a number*/
+      number: function(num){
+        if (typeof num !== "number") {
+          return false;
+        }
+        return true;
+      },
+      /*checks if the number is valid as a number and is within specified limits*/
+      number: function(num, min, max){
+        if (typeof num !== "number" || num < min || num > max) {
+          return false;
+        }
+        return true;
+      },
+      /*checks if the argument is valid as a boolean*/
+      boolean: function(input){
+        if (typeof input !== "boolean") {
+          return false;
+        }
+        return true; 
+      }
     }
   };
   binary = {
@@ -365,13 +400,6 @@ Feel free to contribute and/or use this library :-)
       return array;
     },
     flatten: function(arr) {
-      /*
-          make an array.flatten. This method should transform twodimensional
-          arrays to onedimensjonal arrays:
-            var twodim = [[1,2,3,4], [11,22,33,44]];
-            var onedim = todim.flatten();
-            //onedim = [1,2,3,4,11,22,33,44];
-        */
       let returArr = [];
 
       for(i in arr){
